@@ -1,1 +1,42 @@
-<p>user-form works!</p>
+<div class="user-form">
+  <div *ngIf="error" class="alert-message">{{error}}</div>
+
+  <div>
+    <div class="user-form__header">
+      {{user ? user.firstName + ' ' + user.lastName : 'Create new user'}}
+    </div>
+
+    <div class="user-form__body">
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="user-form__field">
+          <label class="user-form__label">Username*</label>
+          <input type="text" formControlName="username" class="user-form__input">
+        </div>
+        <div class="user-form__field">
+          <label class="user-form__label">First Name</label>
+          <input type="text" formControlName="firstName" class="user-form__input">
+        </div>
+        <div class="user-form__field">
+          <label class="user-form__label">Email</label>
+          <input type="text" formControlName="email" class="user-form__input">
+        </div>
+        <div class="user-form__field">
+          <label class="user-form__label">Type*</label>
+          <input type="text" formControlName="userType" class="user-form__input">
+        </div>
+        <div class="user-form__field">
+          <label class="user-form__label">Password</label>
+          <input type="text" formControlName="password" class="user-form__input">
+        </div>
+        <div class="user-form__field">
+          <label class="user-form__label">Repeat Password</label>
+          <input type="text" formControlName="passwordRepeat" class="user-form__input">
+        </div>
+        <div class="user-form__controls">
+          <button class="btn btn_alert" (click)="onDelete()">Delete</button>
+          <button class="btn btn_default">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

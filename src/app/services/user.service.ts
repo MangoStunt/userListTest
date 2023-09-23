@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {IUserInterface} from "../shared/models/user.interface";
 import {environment} from "../shared/environment";
-import {map, Observable} from "rxjs";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,7 @@ export class UserService {
     return this.http.post(`${environment.apiUrl}/user/add`, userData)
   }
 
-  public getUser(userId: string | number): Observable<IUserInterface> {
+  public getUser(userId: string | null): Observable<IUserInterface> {
     return this.http.get<IUserInterface>(`${environment.apiUrl}/user/${userId}`)
   }
 

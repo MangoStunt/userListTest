@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {Router, RouterLink, RouterModule} from "@angular/router";
+import {Router, RouterModule} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {Observable} from "rxjs";
 import {IUserInterface} from "../../shared/models/user.interface";
-import {BrowserModule} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-user-list',

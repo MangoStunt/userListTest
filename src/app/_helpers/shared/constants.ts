@@ -1,5 +1,5 @@
-import {UserType} from "../../app/shared/enums/user-type.enum";
-import {IUserInterface} from "../../app/shared/models/user.interface";
+import {UserType} from "../../shared/enums/user-type.enum";
+import {IUserInterface} from "../../shared/models/user.interface";
 
 interface IBeConstants {
   localStorageKey: string;

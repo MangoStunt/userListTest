@@ -10,16 +10,19 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of (usersList$ | async)">
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+      <tr
+        *ngFor="let user of (usersList$ | async)"
+        [routerLink]="['', { outlets: { userForm: ['user', user.id]} }]
+      ">
+        <td>{{user.username}}</td>
+        <td>{{user.firstName}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.userType}}</td>
       </tr>
     </tbody>
   </table>
 </div>
 <button [routerLink]="['', { outlets: { userForm: 'user'} }]">To User Creation</button>
-<button [routerLink]="['', { outlets: { userForm: ['user', userId]} }]">To User Editing</button>
+<!--<button [routerLink]="['', { outlets: { userForm: ['user', userId]} }]">To User Editing</button>-->
 <button [routerLink]="['', { outlets: { userForm: null } }]">Leave just pure list</button>
