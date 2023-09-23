@@ -1,5 +1,4 @@
 import {Routes} from "@angular/router";
-import {UserListComponent} from "./components/user-list/user-list.component";
 import {userResolver} from "./shared/resolvers/user.resolver";
 
 export const APP_ROUTES: Routes = [

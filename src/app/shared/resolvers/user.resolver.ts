@@ -9,6 +9,7 @@ export const userResolver: ResolveFn<IUserInterface> = (
   state,
   userService: UserService = inject(UserService)
 ): Observable<IUserInterface> => {
+  console.log(route.paramMap.get('id'))
   return userService.getUser(route.paramMap.get('id'))
     .pipe(
       filter<IUserInterface>((user: IUserInterface) => !!user),

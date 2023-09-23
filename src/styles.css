@@ -1,1 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+  background: #EDEFF7;
+  font-family: 'Roboto Light', sans-serif;
+}
+
+.btn {
+  width: 110px;
+  height: 35px;
+
+  margin: 10px 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #2E8FF0;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+
+  box-shadow: 0 5px 15px -10px rgba(0,0,0,1);
+
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.btn:hover {
+  background: #287acc;
+}
+
+.btn_alert {
+  background-color: #F44682;
+}
+
+.btn_alert:hover {
+  background-color: #c43868;
+}

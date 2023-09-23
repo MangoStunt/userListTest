@@ -1,28 +1,30 @@
 <div class="user-list">
-  <table>
-    <thead>
-      <tr>
-        <th>Username</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Type</th>
+  <button class="btn" [routerLink]="['', { outlets: { userForm: 'user'} }]">Create User</button>
+  <!--<button [routerLink]="['', { outlets: { userForm: ['user', userId]} }]">To User Editing</button>-->
+<!--  <button class="btn" [routerLink]="['', { outlets: { userForm: null } }]">Leave just pure list</button>-->
+
+  <table class="user-list__table">
+    <thead class="user-list__table-head">
+      <tr class="user-list__table-head__row">
+        <th style="width: 20%" class="user-list__table-head__item">Username</th>
+        <th style="width: 20%" class="user-list__table-head__item">First Name</th>
+        <th style="width: 20%" class="user-list__table-head__item">Last Name</th>
+        <th style="width: 30%" class="user-list__table-head__item">Email</th>
+        <th style="width: 10%" class="user-list__table-head__item">Type</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="user-list__table-body">
       <tr
+        class="user-list__table-body__row"
         *ngFor="let user of (usersList$ | async)"
         [routerLink]="['', { outlets: { userForm: ['user', user.id]} }]
       ">
-        <td>{{user.username}}</td>
-        <td>{{user.firstName}}</td>
-        <td>{{user.lastName}}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.userType}}</td>
+        <td style="width: 20%" class="user-list__table-body__cell">{{user.username}}</td>
+        <td style="width: 20%" class="user-list__table-body__cell">{{user.firstName}}</td>
+        <td style="width: 20%" class="user-list__table-body__cell">{{user.lastName}}</td>
+        <td style="width: 30%" class="user-list__table-body__cell">{{user.email}}</td>
+        <td style="width: 10%" class="user-list__table-body__cell">{{user.userType}}</td>
       </tr>
     </tbody>
   </table>
 </div>
-<button [routerLink]="['', { outlets: { userForm: 'user'} }]">To User Creation</button>
-<!--<button [routerLink]="['', { outlets: { userForm: ['user', userId]} }]">To User Editing</button>-->
-<button [routerLink]="['', { outlets: { userForm: null } }]">Leave just pure list</button>

@@ -1,0 +1,14 @@
+
+.user-app__container {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0 5vw;
+}
+
+router-outlet {
+  position: absolute;
+}

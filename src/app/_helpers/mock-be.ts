@@ -3,7 +3,7 @@ import {
   HttpRequest,
   HttpResponse
 } from "@angular/common/http";
-import {delay, of, throwError} from "rxjs";
+import {of, throwError} from "rxjs";
 import {IUserInterface} from "../shared/models/user.interface";
 import {BE_CONSTANTS} from "./shared/constants";
 
@@ -14,6 +14,7 @@ export function BackendInterceptor(req: HttpRequest<any>, next: HttpHandler) {
   return handleRoute()
 
   function handleRoute() {
+
     switch (true) {
       case url.endsWith('/users') && method === 'GET':
         return getUsersList()
@@ -24,17 +25,19 @@ export function BackendInterceptor(req: HttpRequest<any>, next: HttpHandler) {
       case url.match(/\/user\/\d+$/) && method === 'PUT':
         return updateUser()
       case url.match(/\/user\/\d+$/) && method === 'DELETE':
-        return removeUser()
+        return deleteUser()
       default:
         return next.handle(req)
     }
   }
 
   function getUsersList() {
+    console.log('BE: getUsersList')
     return resOk(usersData.map(u => tableUserData(u)))
   }
 
   function addNewUser() {
+    console.log('BE: addNewUser')
     const newUser = body
 
     if (usersData.find(u => u.username === newUser.username)) return error(`Username: ${newUser.username} has already been taken. Choose another one, please`)
@@ -47,11 +50,13 @@ export function BackendInterceptor(req: HttpRequest<any>, next: HttpHandler) {
   }
 
   function getUserById() {
+    console.log('BE: getUserById')
     const user = usersData.find(u => u.id === getLinkId())
     return resOk(user)
   }
 
   function updateUser() {
+    console.log('BE: updateUser')
     const updatedUser = body
     const user = usersData.find(u => u.id === getLinkId())
 
@@ -66,8 +71,10 @@ export function BackendInterceptor(req: HttpRequest<any>, next: HttpHandler) {
     return resOk()
   }
 
-  function removeUser() {
+  function deleteUser() {
+    console.log('BE: deleteUser')
     usersData = usersData.filter(u => u.id !== getLinkId())
+    console.log('be user delete', usersData)
     localStorage.setItem(BE_CONSTANTS.localStorageKey, JSON.stringify(usersData))
 
     return resOk()

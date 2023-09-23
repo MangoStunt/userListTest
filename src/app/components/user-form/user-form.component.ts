@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {IUserInterface} from "../../shared/models/user.interface";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -13,10 +13,9 @@ import {first} from "rxjs";
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.css']
 })
-export class UserFormComponent implements OnInit{
+export class UserFormComponent implements OnInit {
   public user!: IUserInterface | undefined;
   public error = false
-  public loading = false
   public userForm!: FormGroup;
 
   constructor(
@@ -24,10 +23,14 @@ export class UserFormComponent implements OnInit{
     private router: Router,
     private fb: FormBuilder,
     private userService: UserService
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
-    this.user = this.route.snapshot.data['user'] || undefined
+    this.route.data.subscribe(({user}) => {
+      this.user = user
+    })
+
     this.userForm = new FormGroup({
       'username': new FormControl(this.user?.username || '', Validators.required),
       'firstName': new FormControl(this.user?.firstName || '', Validators.required),
@@ -40,37 +43,46 @@ export class UserFormComponent implements OnInit{
   }
 
   onSubmit() {
-    console.table(this.userForm)
-    // if (this.userForm.invalid) {
-    //   return
-    // }
-    //
-    // if (this.user) {
-    //   this.userService.updateUser(this.user.id, this.userForm.value)
-    //     .pipe(first())
-    //     .subscribe({
-    //       next: () => {
-    //         this.router.navigate(['', { outlets: { userForm: null } }])
-    //       },
-    //       error: e => {
-    //         //something here
-    //       }
-    //     })
-    // } else {
-    //   this.userService.addUser(this.userForm.value)
-    //     .pipe(first())
-    //     .subscribe({
-    //       next: () => {
-    //         this.router.navigate(['', { outlets: { userForm: null } }])
-    //       },
-    //       error: e => {
-    //         //error handling
-    //       }
-    //     })
-    // }
+    if (this.userForm.invalid) {
+      return
+    }
+
+    if (this.user) {
+      this.userService.updateUser(this.user.id, this.userForm.value)
+        .pipe(first())
+        .subscribe({
+          next: () => {
+            this.router.navigate(['', {outlets: {userForm: null}}])
+          },
+          error: e => {
+            //something here
+          }
+        })
+    } else {
+      this.userService.addUser(this.userForm.value)
+        .pipe(first())
+        .subscribe({
+          next: () => {
+            this.router.navigate(['', {outlets: {userForm: null}}]).then(i => alert(`User ${this.userForm.get('username')?.value} added`))
+          },
+          error: e => {
+            //error handling
+          }
+        })
+    }
   }
 
   onDelete() {
-    console.log(this.user)
+    if (this.user) {
+      this.userService.deleteUser(this.user.id)
+        .subscribe({
+          next: () => {
+            this.router.navigate(['', {outlets: {userForm: null}}]).then(i => alert(`User ${this.userForm.get('username')?.value} added`))
+          },
+          error: e => {
+            //error handling
+          }
+        })
+    }
   }
 }

@@ -1,13 +1,13 @@
 <div class="user-form">
   <div *ngIf="error" class="alert-message">{{error}}</div>
 
-  <div>
+  <div class="user-form__container">
     <div class="user-form__header">
       {{user ? user.firstName + ' ' + user.lastName : 'Create new user'}}
     </div>
 
     <div class="user-form__body">
-      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="userForm">
         <div class="user-form__field">
           <label class="user-form__label">Username*</label>
           <input type="text" formControlName="username" class="user-form__input">
@@ -15,6 +15,10 @@
         <div class="user-form__field">
           <label class="user-form__label">First Name</label>
           <input type="text" formControlName="firstName" class="user-form__input">
+        </div>
+        <div class="user-form__field">
+          <label class="user-form__label">Last Name</label>
+          <input type="text" formControlName="lastName" class="user-form__input">
         </div>
         <div class="user-form__field">
           <label class="user-form__label">Email</label>
@@ -33,8 +37,8 @@
           <input type="text" formControlName="passwordRepeat" class="user-form__input">
         </div>
         <div class="user-form__controls">
-          <button class="btn btn_alert" (click)="onDelete()">Delete</button>
-          <button class="btn btn_default">Add</button>
+          <button class="btn btn_alert" *ngIf="user" (click)="onDelete()">Delete</button>
+          <button class="btn btn_default" (click)="onSubmit()">{{user ? "Save" : "Create"}}</button>
         </div>
       </form>
     </div>
