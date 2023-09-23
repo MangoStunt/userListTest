@@ -34,10 +34,33 @@ html, body {
   background: #287acc;
 }
 
+.btn__disabled {
+  background: #b5b6bb;
+  color: #595a5d;
+}
+
+.btn__disabled:hover {
+  background: #b5b6bb;
+  color: #595a5d;
+}
+
 .btn_alert {
   background-color: #F44682;
 }
 
 .btn_alert:hover {
   background-color: #c43868;
+}
+
+.close-btn {
+  width: 18px;
+  height: 18px;
+
+  cursor: pointer;
+  transform-origin: center;
+  transition: all 0.5s ease;
+}
+
+.close-btn:hover {
+  transform: rotate(-90deg);
 }

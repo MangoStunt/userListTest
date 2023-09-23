@@ -4,41 +4,70 @@
   <div class="user-form__container">
     <div class="user-form__header">
       {{user ? user.firstName + ' ' + user.lastName : 'Create new user'}}
+      <div class="close-btn" [routerLink]="['', { outlets: { userForm: null } }]">
+        <img ngSrc="./assets/icons/close-icon.svg" alt="X" height="18" width="18">
+      </div>
     </div>
 
     <div class="user-form__body">
-      <form [formGroup]="userForm">
+      <form id="userForm" [formGroup]="userForm">
         <div class="user-form__field">
           <label class="user-form__label">Username*</label>
           <input type="text" formControlName="username" class="user-form__input">
+          <div class="user-form__error-message" *ngIf="usernameControl?.invalid">
+            {{getUsernameError()}}
+          </div>
         </div>
         <div class="user-form__field">
-          <label class="user-form__label">First Name</label>
+          <label class="user-form__label">First Name*</label>
           <input type="text" formControlName="firstName" class="user-form__input">
+          <div class="user-form__error-message" *ngIf="firstNameControl?.invalid && firstNameControl?.touched">
+            Field is required
+          </div>
         </div>
         <div class="user-form__field">
-          <label class="user-form__label">Last Name</label>
+          <label class="user-form__label">Last Name*</label>
           <input type="text" formControlName="lastName" class="user-form__input">
+          <div class="user-form__error-message" *ngIf="lastNameControl?.invalid && lastNameControl?.touched">
+            Field is required
+          </div>
         </div>
         <div class="user-form__field">
-          <label class="user-form__label">Email</label>
-          <input type="text" formControlName="email" class="user-form__input">
+          <label class="user-form__label">Email*</label>
+          <input type="text" formControlName="email" class="user-form__input user-form__input-email">
+          <div class="user-form__error-message" *ngIf="emailControl?.invalid">
+            {{getEmailError()}}
+          </div>
         </div>
         <div class="user-form__field">
           <label class="user-form__label">Type*</label>
-          <input type="text" formControlName="userType" class="user-form__input">
+          <select class="user-form__select" formControlName="userType">
+            <option *ngFor="let userType of UserType.keys()" [value]="userType">
+              {{userType | titlecase}}
+            </option>
+          </select>
+          <div class="user-form__error-message" *ngIf="userTypeControl?.invalid && userTypeControl?.touched">
+            Field is required
+          </div>
         </div>
         <div class="user-form__field">
-          <label class="user-form__label">Password</label>
-          <input type="text" formControlName="password" class="user-form__input">
+          <label class="user-form__label">Password*</label>
+          <input type="password" formControlName="password" class="user-form__input">
+          <div class="user-form__error-message" *ngIf="passwordControl?.invalid">
+            {{getPasswordError()}}
+          </div>
         </div>
         <div class="user-form__field">
-          <label class="user-form__label">Repeat Password</label>
-          <input type="text" formControlName="passwordRepeat" class="user-form__input">
+          <label class="user-form__label">Repeat Password*</label>
+          <input type="password" formControlName="passwordRepeat" class="user-form__input">
+          <div class="user-form__error-message" *ngIf="matchPasswordControl?.invalid">
+            {{getPasswordMatchError()}}
+          </div>
         </div>
         <div class="user-form__controls">
+          <button class="btn btn_default" [ngClass]="{'btn__disabled': !!userForm.invalid}"
+                  (click)="onSubmit()">{{user ? "Save" : "Create"}}</button>
           <button class="btn btn_alert" *ngIf="user" (click)="onDelete()">Delete</button>
-          <button class="btn btn_default" (click)="onSubmit()">{{user ? "Save" : "Create"}}</button>
         </div>
       </form>
     </div>

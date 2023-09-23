@@ -10,22 +10,86 @@
   border-radius: 5px;
   border-spacing: 0;
 
-  box-shadow: 5px 5px 30px -20px rgba(0,0,0,1);
+  box-shadow: 5px 5px 30px -20px rgba(0, 0, 0, 1);
 
   .user-form__container {
     display: flex;
     flex-direction: column;
     height: 100%;
-  .user-form__header {
-    width: 100%;
-    height: 10%;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    .user-form__header {
+      width: 100%;
+      height: 10%;
 
-    font-size: 16px;
-    font-weight: 600;
-  }
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .user-form__body {
+      height: 90%;
+
+      #userForm {
+        height: 100%;
+
+        display: flex;
+        flex-direction: column;
+      }
+
+      .user-form__field {
+        display: flex;
+        flex-direction: column;
+
+        height: 12.5%;
+
+        .user-form__label {
+          font-size: 11px;
+          margin-bottom: 2px;
+        }
+
+        .user-form__error-message {
+          font-size: 9px;
+          color: #F44682;
+        }
+
+        .user-form__input, .user-form__select {
+          height: 60%;
+          background: #EDEFF7;
+          border: none;
+          border-radius: 5px;
+          color: #595a5d;
+          font-size: 13px;
+          padding: 0 10px;
+
+          transition: background-color, color 0.25s ease;
+
+        }
+
+        .user-form__input-email, .user-form__input-email:focus {
+          background: url("../../../assets/icons/email-icon.svg") no-repeat scroll 8px 8px, #edeff7;
+          background-size: 16px;
+          padding-left: 30px;
+        }
+
+        .user-form__input:focus {
+          color: #48494b;
+          background-color: #e6e8ef;
+          outline: none !important;
+          border: none !important;
+        }
+      }
+
+      .user-form__controls {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        justify-content: space-between;
+
+        height: 20%;
+      }
+    }
   }
 }
