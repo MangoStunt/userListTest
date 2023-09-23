@@ -23,12 +23,11 @@ export class CustomValidators {
     return (control: AbstractControl): ValidationErrors | null => {
       let isNameTaken = true;
 
-      console.log(username)
-
       if (username) {
-        isNameTaken = !!(control.value !== null && this.userNameList.find(name => control.value !== name && control.value === username))
+        const userNameList = [...this.userNameList.filter(name => name !== username)]
+        isNameTaken = !(control.value !== null && !userNameList.find(name => control.value === name)?.length)
       } else {
-        isNameTaken = !(control.value !== null && this.userNameList.find(name => control.value !== name))
+        isNameTaken = !(control.value !== null && !this.userNameList.filter(name => control.value === name).length)
       }
 
       return isNameTaken ? {nameTaken: true} : null

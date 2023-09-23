@@ -31,7 +31,7 @@ export class UserFormComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(({user}) => {
       this.user = user
-    })
+
 
     this.userForm = new FormGroup({
         'username': new FormControl(this.user?.username || '', [Validators.required, this.customValidators.uniqueUsernameValidator(this.user?.username || null)]),
@@ -43,6 +43,7 @@ export class UserFormComponent implements OnInit {
         'passwordRepeat': new FormControl('', Validators.required)
       },
       this.customValidators.matchFieldsValidator('password', 'passwordRepeat'))
+    })
   }
 
   onSubmit() {
