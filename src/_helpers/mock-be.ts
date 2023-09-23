@@ -5,7 +5,7 @@ import {IUserInterface} from "../app/shared/models/user.interface";
 import {BE_CONSTANTS} from "./shared/constants";
 import {error} from "@angular/compiler-cli/src/transformers/util";
 
-let usersData: IUserInterface[] = JSON.parse(localStorage.getItem(BE_CONSTANTS.localStorageKey)!) || []
+let usersData: IUserInterface[] = JSON.parse(localStorage.getItem(BE_CONSTANTS.localStorageKey)!) || BE_CONSTANTS.defaultUsersList
 @Injectable()
 export class BackendInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -19,11 +19,11 @@ export class BackendInterceptor implements HttpInterceptor {
           return getUsersList()
         case url.endsWith('/user/add') && method === 'POST':
           return addNewUser()
-        case url.match(/\/users\/\d+$/) && method === 'GET':
+        case url.match(/\/user\/\d+$/) && method === 'GET':
           return getUserById()
-        case url.match(/\/users\/\d+$/) && method === 'PUT':
+        case url.match(/\/user\/\d+$/) && method === 'PUT':
           return updateUser()
-        case url.match(/\/users\/\d+$/) && method === 'DELETE':
+        case url.match(/\/user\/\d+$/) && method === 'DELETE':
           return removeUser()
         default:
           return next.handle(req)
