@@ -32,12 +32,10 @@ export function BackendInterceptor(req: HttpRequest<any>, next: HttpHandler) {
   }
 
   function getUsersList() {
-    console.log('BE: getUsersList')
     return resOk(usersData.map(u => tableUserData(u)))
   }
 
   function addNewUser() {
-    console.log('BE: addNewUser')
     const newUser = body
 
     if (usersData.find(u => u.username === newUser.username)) return error(`Username: ${newUser.username} has already been taken. Choose another one, please`)
@@ -50,13 +48,11 @@ export function BackendInterceptor(req: HttpRequest<any>, next: HttpHandler) {
   }
 
   function getUserById() {
-    console.log('BE: getUserById')
     const user = usersData.find(u => u.id === getLinkId())
     return resOk(user)
   }
 
   function updateUser() {
-    console.log('BE: updateUser')
     const updatedUser = body
     const user = usersData.find(u => u.id === getLinkId())
 
@@ -72,9 +68,7 @@ export function BackendInterceptor(req: HttpRequest<any>, next: HttpHandler) {
   }
 
   function deleteUser() {
-    console.log('BE: deleteUser')
     usersData = usersData.filter(u => u.id !== getLinkId())
-    console.log('be user delete', usersData)
     localStorage.setItem(BE_CONSTANTS.localStorageKey, JSON.stringify(usersData))
 
     return resOk()
