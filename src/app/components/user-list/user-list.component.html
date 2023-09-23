@@ -1,0 +1,4 @@
+<p>user-list works!</p>
+<button [routerLink]="['', { outlets: { userForm: 'user'} }]">To User Creation</button>
+<button [routerLink]="['', { outlets: { userForm: ['user', userId]} }]">To User Editing</button>
+<button [routerLink]="['', { outlets: { userForm: null } }]">Leave just pure list</button>
