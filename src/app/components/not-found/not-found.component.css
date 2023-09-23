@@ -1,0 +1,20 @@
+.not-found {
+  color: #595a5d;
+
+  .not-found__heading {
+    font-size: 200px;
+  }
+
+  .not-found__text {
+    font-size: 48px;
+  }
+
+  .not-found__link {
+    width: 200px;
+    height: 60px;
+
+    margin-top: 200px;
+
+    font-size: 20px;
+  }
+}

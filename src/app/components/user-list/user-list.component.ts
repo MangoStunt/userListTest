@@ -14,6 +14,7 @@ import {IUserInterface} from "../../shared/models/user.interface";
 })
 export class UserListComponent implements OnInit, OnDestroy {
   usersList$?: Observable<IUserInterface[]>
+
   constructor(
     private router: Router,
     private userService: UserService

@@ -7,7 +7,7 @@ import {UserService} from "./services/user.service";
   standalone: true,
   templateUrl: './app.component.html',
   imports: [
-    RouterOutlet
+    RouterOutlet,
   ],
   styleUrls: ['./app.component.css']
 })

@@ -7,6 +7,7 @@ import {UserService} from "../../services/user.service";
 import {first} from "rxjs";
 import {UserType} from "../../shared/enums/user-type.enum";
 import {CustomValidators} from "../../shared/validators/user-form.validators";
+import {AlertOptions} from "../../shared/models/alert.model";
 
 @Component({
   selector: 'app-user-form',
@@ -19,12 +20,16 @@ export class UserFormComponent implements OnInit {
   public user!: IUserInterface | undefined;
   public error = false
   public userForm!: FormGroup;
+  private alertOptions: AlertOptions = {
+    autoClose: false,
+    keepAfterRouteChange: true
+  }
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private customValidators: CustomValidators,
-    private userService: UserService
+    private userService: UserService,
   ) {
   }
 
@@ -62,20 +67,16 @@ export class UserFormComponent implements OnInit {
           next: () => {
             this.router.navigate(['', {outlets: {userForm: null}}])
           },
-          error: e => {
-            //something here
-          }
+          error: e => {}
         })
     } else {
       this.userService.addUser(this.userForm.value)
         .pipe(first())
         .subscribe({
           next: () => {
-            this.router.navigate(['', {outlets: {userForm: null}}]).then(i => i)
+            this.router.navigate(['', {outlets: {userForm: null}}])
           },
-          error: e => {
-            //error handling
-          }
+          error: e => {}
         })
     }
   }
@@ -85,11 +86,9 @@ export class UserFormComponent implements OnInit {
       this.userService.deleteUser(this.user.id)
         .subscribe({
           next: () => {
-            this.router.navigate(['', {outlets: {userForm: null}}]).then(i => alert(`User ${this.userForm.get('username')?.value} added`))
+            this.router.navigate(['', {outlets: {userForm: null}}])
           },
-          error: e => {
-            //error handling
-          }
+          error: e => {}
         })
     }
   }
