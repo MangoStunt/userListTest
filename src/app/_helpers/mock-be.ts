@@ -49,12 +49,20 @@ export function BackendInterceptor(req: HttpRequest<any>, next: HttpHandler) {
 
   function getUserById() {
     const user = usersData.find(u => u.id === getLinkId())
+
+    if (!user) {
+      return error('Can`t find user with such id')
+    }
+
     return resOk(user)
   }
 
   function updateUser() {
     const updatedUser = body
     const user = usersData.find(u => u.id === getLinkId())
+
+    //Do this if you want to test error messaging
+    // const user = undefined
 
     if (!user) {
       return error(`User with Id: ${getLinkId()} doesn't found`)
@@ -69,9 +77,14 @@ export function BackendInterceptor(req: HttpRequest<any>, next: HttpHandler) {
 
   function deleteUser() {
     usersData = usersData.filter(u => u.id !== getLinkId())
-    localStorage.setItem(BE_CONSTANTS.localStorageKey, JSON.stringify(usersData))
 
-    return resOk()
+    if (!usersData.length) {
+      return error('Some error occurred while deleting the user')
+    } else {
+      localStorage.setItem(BE_CONSTANTS.localStorageKey, JSON.stringify(usersData))
+
+      return resOk()
+    }
   }
 
   function resOk(body?: any) {

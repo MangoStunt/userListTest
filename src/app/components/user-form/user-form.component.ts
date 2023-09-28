@@ -7,7 +7,7 @@ import {UserService} from "../../services/user.service";
 import {first} from "rxjs";
 import {UserType} from "../../shared/enums/user-type.enum";
 import {CustomValidators} from "../../shared/validators/user-form.validators";
-import {AlertOptions} from "../../shared/models/alert.model";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-user-form',
@@ -20,14 +20,11 @@ export class UserFormComponent implements OnInit {
   public user!: IUserInterface | undefined;
   public error = false
   public userForm!: FormGroup;
-  private alertOptions: AlertOptions = {
-    autoClose: false,
-    keepAfterRouteChange: true
-  }
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private alert: ToastrService,
     private customValidators: CustomValidators,
     private userService: UserService,
   ) {
@@ -66,8 +63,11 @@ export class UserFormComponent implements OnInit {
         .subscribe({
           next: () => {
             this.router.navigate(['', {outlets: {userForm: null}}])
+            this.alert.success(`User ${this.userForm.get('username')?.value} was updated`, '', {toastClass: 'custom-alert__success'})
           },
-          error: e => {}
+          error: e => {
+            this.alert.error(e.error.message, 'Error')
+          }
         })
     } else {
       this.userService.addUser(this.userForm.value)
@@ -75,8 +75,11 @@ export class UserFormComponent implements OnInit {
         .subscribe({
           next: () => {
             this.router.navigate(['', {outlets: {userForm: null}}])
+            this.alert.success(`User ${this.userForm.get('username')?.value} was added`, '', {toastClass: 'custom-alert__success'})
           },
-          error: e => {}
+          error: e => {
+            this.alert.error(e.error.message, 'Error')
+          }
         })
     }
   }
@@ -87,8 +90,11 @@ export class UserFormComponent implements OnInit {
         .subscribe({
           next: () => {
             this.router.navigate(['', {outlets: {userForm: null}}])
+            this.alert.success(`User ${this.user?.username} was deleted`, '', {toastClass: 'custom-alert__success'})
           },
-          error: e => {}
+          error: e => {
+            this.alert.error(e.error.message || 'Error', '', {toastClass: 'custom-alert__error', positionClass: 'toast-top-left'})
+          }
         })
     }
   }

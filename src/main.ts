@@ -4,6 +4,9 @@ import {AppComponent} from "./app/app.component";
 import {provideRouter} from "@angular/router";
 import {APP_ROUTES} from "./app/app.routes";
 import {BackendInterceptor} from "./app/_helpers/mock-be";
+import {provideToastr} from "ngx-toastr";
+import {provideAnimations} from "@angular/platform-browser/animations";
+import {HttpErrorInterceptor} from "./app/shared/interceptors/http-error.interceptor";
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -11,8 +14,12 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(
       withInterceptors([
         // @ts-ignore
-        BackendInterceptor
+        BackendInterceptor,
+        // @ts-ignore
+        HttpErrorInterceptor
       ])
-    )
+    ),
+    provideAnimations(),
+    provideToastr(),
   ]
 })

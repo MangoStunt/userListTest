@@ -64,3 +64,22 @@ html, body {
 .close-btn:hover {
   transform: rotate(-90deg);
 }
+
+.custom-alert__success, .custom-alert__error {
+  background-image: none !important;
+  color: white;
+
+  min-width: 250px;
+  padding: 15px 20px;
+  font-size: 12px;
+  border: none;
+  border-radius: 10px;
+}
+
+.custom-alert__success {
+  background-color: #66BB6A !important;
+}
+
+.custom-alert__error {
+  background-color: #EF7DA0 !important;
+}
