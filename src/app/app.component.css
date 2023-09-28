@@ -11,14 +11,7 @@
 }
 
 
-router-outlet, alert {
+router-outlet {
   position: absolute;
 }
 
-alert {
-  width: 100vw;
-  height: 10vw;
-
-  top: 0;
-  left: 0;
-}

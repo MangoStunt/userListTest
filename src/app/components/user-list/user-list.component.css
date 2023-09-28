@@ -72,4 +72,19 @@
       }
     }
   }
+
+  .user-list__empty-template {
+    width: 60%;
+    height: 50vh;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 150%;
+    color: #595a5d;
+    text-align: center;
+  }
 }

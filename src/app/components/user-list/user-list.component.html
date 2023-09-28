@@ -12,6 +12,7 @@
       </tr>
     </thead>
     <tbody class="user-list__table-body">
+    <ng-container *ngIf="(usersList$ | async)?.length else usersListEmpty">
       <tr
         class="user-list__table-body__row"
         *ngFor="let user of (usersList$ | async)"
@@ -23,6 +24,13 @@
         <td style="width: 30%" class="user-list__table-body__cell">{{user.email}}</td>
         <td style="width: 10%" class="user-list__table-body__cell">{{user.userType | titlecase}}</td>
       </tr>
+    </ng-container>
     </tbody>
   </table>
 </div>
+
+<ng-template #usersListEmpty>
+  <div class="user-list__empty-template">
+    It seems like there are no any users has been added yet. You can be first!
+  </div>
+</ng-template>
