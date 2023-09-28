@@ -66,7 +66,7 @@ export class UserFormComponent implements OnInit {
             this.alert.success(`User ${this.userForm.get('username')?.value} was updated`, '', {toastClass: 'custom-alert__success'})
           },
           error: e => {
-            this.alert.error(e.error.message, 'Error')
+            this.alert.error(e.error.message || 'Error', '', {toastClass: 'custom-alert__error', positionClass: 'toast-top-left'})
           }
         })
     } else {
@@ -78,7 +78,7 @@ export class UserFormComponent implements OnInit {
             this.alert.success(`User ${this.userForm.get('username')?.value} was added`, '', {toastClass: 'custom-alert__success'})
           },
           error: e => {
-            this.alert.error(e.error.message, 'Error')
+            this.alert.error(e.error.message || 'Error', '', {toastClass: 'custom-alert__error', positionClass: 'toast-top-left'})
           }
         })
     }
