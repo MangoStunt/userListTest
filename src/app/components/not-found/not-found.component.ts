@@ -11,10 +11,14 @@ import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 })
 export class NotFoundComponent implements OnInit{
   errorCode: string = '404'
-  constructor(private route: ActivatedRoute) {}
+  errorMessage: string = 'Page not found'
+  routeParams: any
+  constructor(private router: Router, private route: ActivatedRoute) {
+    this.routeParams = this.router.getCurrentNavigation()
+  }
 
   ngOnInit() {
-    console.log(this.route.snapshot.queryParamMap.get('type'))
     this.errorCode = this.route.snapshot.queryParamMap.get('type') || '404'
+    this.errorMessage = this.route.snapshot.queryParamMap.get('message') || 'Page not found'
   }
 }

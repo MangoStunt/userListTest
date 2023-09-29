@@ -162,7 +162,7 @@ export class UserFormComponent implements OnInit {
       return control.hasError('required')
         ? 'Password is required'
         : control.hasError('pattern')
-          ? 'Password must contain at least 8 characters and include minimum 1 number and 1 title letter'
+          ? 'Password must contain at least 8 characters and include 1 number, 1 title and 1 small letter'
           : ''
     } else {
       return ''

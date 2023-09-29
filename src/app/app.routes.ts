@@ -19,10 +19,16 @@ export const APP_ROUTES: Routes = [
   },
   {
     path: '**',
+    redirectTo: '/404',
+    outlet: 'userForm'
+  },
+  {
+    path: '**',
     redirectTo: '/404'
   },
   {
     path: '404',
     loadComponent: () => import('./components/not-found/not-found.component').then(m => m.NotFoundComponent),
+    data: {}
   },
   ]
