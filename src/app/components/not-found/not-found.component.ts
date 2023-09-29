@@ -18,15 +18,7 @@ export class NotFoundComponent implements OnInit{
   }
 
   ngOnInit() {
-    console.log(this.routeParams)
-    console.log(history.state)
-    this.route.params.subscribe(paramsData => {
-      console.log(paramsData)
-    })
-    console.log(this.route.snapshot.queryParamMap)
-    console.log(this.route.queryParams)
-    console.log(this.router.getCurrentNavigation()!.extras.state)
-    // this.errorCode = this.route.snapshot.queryParamMap.get('type') || '404'
-    // this.errorCode = this.route.snapshot.queryParamMap.get('message') || '404'
+    this.errorCode = this.route.snapshot.queryParamMap.get('type') || '404'
+    this.errorMessage = this.route.snapshot.queryParamMap.get('message') || 'Page not found'
   }
 }
